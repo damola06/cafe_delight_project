@@ -1,7 +1,7 @@
 import sys
 
-def display_statuses():
-    for index, value in enumerate(order_statuses):
+def display_list_with_index(list):
+    for index, value in enumerate(list):
         print(index, value)
 
 def display_menu_options():
@@ -46,21 +46,6 @@ def display_orders():
     for index, value in enumerate(orders):
         print(value)
 
-def display_orders_with_index():
-    for index, value in enumerate(orders):
-        print(index, value)
-
-
-def display_menu_with_indexes():
-    for index, value in enumerate(main_menu):
-        print(index, value)
-
-
-def display_courier_with_indexes():
-    for index, value in enumerate(couriers):
-        print(index, value)
-
-
 def handle_menu_options():
     display_menu_options()
     selected_option = int(input("Select option 1, 2, 3 or 4 to proceed, 0 to quit: "))
@@ -78,14 +63,14 @@ def handle_menu_options():
         handle_menu_options()
 
     if selected_option == 3:
-        display_menu_with_indexes()  # this means calling the function created above
+        display_list_with_index(main_menu)  # this means calling the function created above
         index_to_be_updated = int(input("Select the index of the item you want to update: "))
         new_product_name = input("Enter new product name: ")
         main_menu[index_to_be_updated] = new_product_name
         handle_menu_options()
 
     if selected_option == 4:
-        display_menu_with_indexes()
+        display_list_with_index(main_menu)
         index_to_be_deleted = int(input("Select the index of the item you want to delete: "))
         main_menu.pop(index_to_be_deleted)
         handle_menu_options()
@@ -108,14 +93,14 @@ def handle_courier_options():
         handle_courier_options()
 
     if selected_option == 3:
-        display_courier_with_indexes()  # this means calling the function created above
+        display_list_with_index(main_menu)  # this means calling the function created above
         index_to_be_updated = int(input("Select the index of the courier you want to update: "))
         new_courier_name = input("Enter new courier name: ")
         couriers[index_to_be_updated] = new_courier_name
         handle_courier_options()
 
     if selected_option == 4:
-        display_courier_with_indexes()
+        display_list_with_index(main_menu)
         index_to_be_deleted = int(input("Select the index of the courier you want to delete: "))
         couriers.pop(index_to_be_deleted)
         handle_courier_options()
@@ -136,7 +121,7 @@ def handle_order_options():
         customer_name = input("Please enter customer name: ")
         customer_address = input("Please enter customer address: ")
         customer_phone_number = input("Please enter customer phone: ")
-        display_courier_with_indexes()
+        display_list_with_index(couriers)
         selected_courier = int(input("Please select a courier: "))
 
         order = {
@@ -151,10 +136,10 @@ def handle_order_options():
         handle_order_options()
 
     if selected_option == 3:
-        display_orders_with_index()  # this means calling the function created above
+        display_list_with_index(orders)  # this means calling the function created above
         # get index of order to be updated
         index_to_be_updated = int(input("Select the index of the order you want to update status for: "))
-        display_statuses()
+        display_list_with_index(order_statuses)
         # get index of status we want to update to
         chosen_status_index = int(input("Select the index of the new status: "))
         # get order using the index
@@ -168,7 +153,7 @@ def handle_order_options():
         handle_order_options()
 
     if selected_option == 4:
-        display_orders_with_index()  # this means calling the function created above
+        display_list_with_index(orders)  # this means calling the function created above
         index_to_be_updated = int(input("Select the index of the order you want to update status for: "))
         order = orders[index_to_be_updated]
         for key, value in order.items():
@@ -176,7 +161,7 @@ def handle_order_options():
                 continue
 
             if key == "courier":
-                display_courier_with_indexes()
+                display_list_with_index(couriers)
                 selected_courier = int(input("Please select a courier: "))
                 order['courier'] = selected_courier
                 continue
@@ -189,7 +174,7 @@ def handle_order_options():
         handle_order_options()
 
     if selected_option == 5:
-        display_orders_with_index()
+        display_list_with_index(orders)
         index_to_be_deleted = int(input("Select the index of the order you want to delete: "))
         orders.pop(index_to_be_deleted)
         handle_order_options()
