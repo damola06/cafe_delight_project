@@ -1,3 +1,4 @@
 .idea/
 .env
-week_6/__pycache__/
+.DS_Store
+__pycache__/

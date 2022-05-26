@@ -19,10 +19,12 @@ class CafeDatabase:
             charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor)
 
+    # select multiple rows
     def select(self, sql):
         try:
             cursor = self.connection.cursor()
             cursor.execute(sql)
+
             # Gets all rows from the result
             rows = cursor.fetchall()
             cursor.close()
@@ -31,12 +33,12 @@ class CafeDatabase:
             print(f"DB exception: {e}")
             return []
 
-
+    # Select single row
     def selectSingle(self, sql):
         try:
             cursor = self.connection.cursor()
             cursor.execute(sql)
-            # Gets all rows from the result
+            # Gets one row from the result
             row = cursor.fetchone()
             cursor.close()
             return row
@@ -44,6 +46,7 @@ class CafeDatabase:
             print("DB exception: %s," % e)
             return {}
 
+    # Executes a query
     def execute(self, query, val):
         try:
             cursor = self.connection.cursor()
@@ -53,5 +56,6 @@ class CafeDatabase:
         except Exception as e:
             print(f"DB exception: {e}")
 
+    # Closes the database connection
     def closeConnection(self):
         self.connection.close()
