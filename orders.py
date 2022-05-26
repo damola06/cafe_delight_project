@@ -1,6 +1,7 @@
 from products import Product
 from couriers import Courier
 
+
 class Order:
     def __init__(self, database, main_menu):
         self.database = database
@@ -14,7 +15,7 @@ class Order:
 
     def display_orders_options(self):
         print('''
-            [1.] Print order list
+            [1.] Display order
             [2.] Create new order
             [3.] Update order status
             [4.] Update existing order
@@ -37,19 +38,23 @@ class Order:
 
     def handle_order_options(self):
         self.display_orders_options()
-        selected_option = int(input("Select option 1, 2, 3, 4 0r 5 to proceed, 0 to quit: "))
+        selected_option = int(input("Select option 1, 2, 3, 4 0r 5 to proceed, 0 to main menu: "))
 
+        # Back to main menu
         if selected_option == 0:
             self.main_menu()
 
+        # Display order
         if selected_option == 1:
             self.display_orders()
             self.handle_order_options()
 
+        # Create new order
         if selected_option == 2:
             self.products.display_products()
 
-            customer_products = input("Please enter the indexes of the products you want in a comma separated fashion: ")
+            customer_products = input(
+                "Please enter the indexes of the products you want in a comma separated fashion: ")
             customer_name = input("Please enter customer name: ")
             customer_address = input("Please enter customer address: ")
             customer_phone = input("Please enter customer phone: ")
@@ -68,8 +73,8 @@ class Order:
             print("Order added successfully")
             self.handle_order_options()
 
+        # update status of an order_status
         if selected_option == 3:
-            # update status of an order
             self.display_orders()
             # get index of order to be updated
             id_to_be_updated = int(input("Select the id of the order you want to update status for: "))
@@ -85,8 +90,9 @@ class Order:
             print("Order status updated successfully")
             self.handle_order_options()
 
+        # Update existing order
         if selected_option == 4:
-            self.display_orders()  # this means calling the function created above
+            self.display_orders()
             id_to_be_updated = int(input("Select the id of the order you want to update status for: "))
             order = self.database.selectSingle(f"SELECT * from orders where id = {id_to_be_updated}")
             for key, value in order.items():
@@ -126,6 +132,7 @@ class Order:
             print("Order updated successfully")
             self.handle_order_options()
 
+        # Delete order
         if selected_option == 5:
             self.display_orders()
             id_to_be_deleted = int(input("Select the id of the order you want to delete: "))
@@ -135,10 +142,9 @@ class Order:
                 self.handle_order_options()
 
             sql = "DELETE from orders WHERE id = %s"
-            val = (id_to_be_deleted)
+            val = int(id_to_be_deleted)
 
             self.database.execute(sql, val)
 
             print("Order deleted successfully")
             self.handle_order_options()
-
