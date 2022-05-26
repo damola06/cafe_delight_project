@@ -4,6 +4,6 @@ RUN pip install -U setuptools
 RUN pip3 install --upgrade pip
 RUN pip3 install pymysql
 RUN pip3 install python-dotenv
-CMD [ "python", "./week_6/app.py" ]
+CMD [ "python", "app.py" ]
 
 
