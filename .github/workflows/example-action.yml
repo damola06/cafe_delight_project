@@ -1,6 +1,8 @@
 name: list-repo
 
 on: push
+  branches:
+    - master
 
 jobs:
   list-repo-files:
