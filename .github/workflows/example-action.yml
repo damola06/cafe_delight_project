@@ -3,7 +3,7 @@ name: list-repo
 on:
   push:
     branches:
-      - damola-line-of-code
+      - master
 
 jobs:
   list-repo-files:
