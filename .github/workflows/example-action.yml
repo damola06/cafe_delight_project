@@ -22,5 +22,4 @@ jobs:
       - name: checkout-repo
         uses: actions/checkout@v2
       - name: install-pygount
-        with:
-          run: pip install pygount && pygount ~/
+        run: pip install pygount && pygount ~/
