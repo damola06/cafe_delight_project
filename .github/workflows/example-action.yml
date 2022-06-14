@@ -14,3 +14,14 @@ jobs:
         uses: actions/checkout@v2
       - name: list-dir
         run: ls -laR # Recursively list directory contents
+
+  count-lines-of-code:
+    name: Count lines of code
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout-repo
+        uses: actions/checkout@v2
+      - name: install-pygount
+        run: pip install pygount
+      - name: count-lines
+        run: pygount --format=summary /home/runner/work/cafe_delight_project/
