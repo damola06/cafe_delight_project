@@ -22,4 +22,6 @@ jobs:
       - name: checkout-repo
         uses: actions/checkout@v2
       - name: install-pygount
-        run: pip install pygount && pygount ~/
+        run: pip install pygount
+      - name: count-lines
+        run: pygount --format=summary ~/home/runner/work/cafe_delight_project/
