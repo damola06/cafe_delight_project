@@ -24,4 +24,4 @@ jobs:
       - name: install-pygount
         run: pip install pygount
       - name: count-lines
-        run: pygount --format=summary ~/home/runner/work/cafe_delight_project/
+        run: pygount --format=summary /home/runner/work/cafe_delight_project/
