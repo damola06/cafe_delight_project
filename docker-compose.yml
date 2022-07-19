@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  db:
+    image: mysql
+    tty: false
+    stdin_open: false
+    container_name: mysql_cafe_delight
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${mysql_pass}"
+    ports:
+      - 3307:3306
+    expose:
+      - 3307
+
+  adminer:
+    image: adminer
+    stdin_open: false
+    container_name: cafe_delight_adminer_container
+    restart: always
+    ports:
+      - 8081:8080
+    expose:
+      - 8081
+
+  app:
+    depends_on:
+      - "db"
+      - "adminer"
+    build: .
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    environment:
+      mysql_host: ${mysql_host}
+      mysql_user: ${mysql_user}
+      mysql_pass: ${mysql_pass}
+      mysql_port: ${mysql_port}
+      mysql_db: ${mysql_db}
